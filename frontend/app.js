@@ -1,3 +1,4 @@
+const API_BASE_URL = "https://cyber-threat-detection-0kdv.onrender.com";
 const { useState, useEffect, useRef } = React;
 
 // --- Helper Functions ---
@@ -60,13 +61,13 @@ function App() {
   // Fetch Stats and Alerts
   const fetchStatsAndAlerts = async () => {
     try {
-      const resStats = await fetch("/api/v1/dashboard/stats");
+      const resStats = await fetch(`${API_BASE_URL}/api/v1/dashboard/stats`);;
       if (resStats.ok) {
         const dataStats = await resStats.json();
         setStats(dataStats);
       }
 
-      const resAlerts = await fetch("/api/v1/threats");
+      const resAlerts = await fetch(`${API_BASE_URL}/api/v1/threats`);;
       if (resAlerts.ok) {
         const dataAlerts = await resAlerts.json();
         setAlerts(dataAlerts.items || []);
@@ -84,7 +85,7 @@ function App() {
 
   // WebSocket Listener
   useEffect(() => {
-    const wsUrl = `ws://${window.location.host}/ws/live-traffic`;
+    const wsUrl = "wss://cyber-threat-detection-0kdv.onrender.com/ws/live-traffic";
     let ws;
     try {
       ws = new WebSocket(wsUrl);
@@ -115,7 +116,7 @@ function App() {
   // Quick Action Handlers
   const handleAcknowledge = async (alertId) => {
     try {
-      const res = await fetch(`/api/v1/threats/${alertId}/ack`, { method: "POST" });
+      const res = await fetch(`${API_BASE_URL}/api/v1/threats/${alertId}/ack`, { method: "POST" });
       if (res.ok) {
         const updated = await res.json();
         setAlerts((prev) => prev.map((a) => (a.alert_id === alertId ? updated : a)));
@@ -131,7 +132,7 @@ function App() {
 
   const handleFalsePositive = async (alertId) => {
     try {
-      const res = await fetch(`/api/v1/threats/${alertId}/false-positive`, { method: "POST" });
+      const res = await fetch(`${API_BASE_URL}/api/v1/threats/${alertId}/false-positive`, { method: "POST" });
       if (res.ok) {
         const updated = await res.json();
         setAlerts((prev) => prev.map((a) => (a.alert_id === alertId ? updated : a)));
@@ -147,7 +148,7 @@ function App() {
 
   const handleBlockIPAction = async (ip) => {
     try {
-      const res = await fetch("/api/v1/actions/block-ip", {
+      const res = await fetch(`${API_BASE_URL}/api/v1/actions/block-ip`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ip, reason: "Analyst dashboard quick action" })
@@ -165,7 +166,7 @@ function App() {
 
   const handleIntelLookup = async (ipToSearch) => {
     try {
-      const res = await fetch(`/api/v1/threat-intel/ips/${ipToSearch}`);
+     const res = await fetch(`${API_BASE_URL}/api/v1/threat-intel/ips/${ipToSearch}`);
       if (res.ok) {
         const data = await res.json();
         setIntelResult(data);
@@ -184,7 +185,7 @@ function App() {
     formData.append("file", file);
 
     try {
-      const res = await fetch("/api/v1/pcaps/upload", {
+     const res = await fetch(`${API_BASE_URL}/api/v1/pcaps/upload`, {
         method: "POST",
         body: formData
       });
@@ -233,7 +234,7 @@ function App() {
       };
 
       const pkts = samplePackets[scenario] || samplePackets.port_scan;
-      const res = await fetch("/api/v1/telemetry/packet", {
+      const res = await fetch(`${API_BASE_URL}/api/v1/telemetry/packet`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(pkts)
