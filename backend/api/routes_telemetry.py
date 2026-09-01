@@ -45,7 +45,7 @@ def ingest_packet(
     for item in inputs:
         val = PacketValidator.validate_dict(item.model_dump())
         if val:
-            alert = orchestrator.process_packet(val, source="live")
+            alert = orchestrator.process_packet(val, source="telemetry_api")
             processed_count += 1
             if alert:
                 alerts_generated.append(alert["payload"])

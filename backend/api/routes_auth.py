@@ -19,7 +19,7 @@ from backend.api.deps import get_current_user, CurrentUser
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
 
-@router.post("/register", response_model=UserResponse, status_code=status.HTTP_211_CREATED if hasattr(status, "HTTP_211_CREATED") else 201)
+@router.post("/register", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
 def register(
     req: UserRegisterRequest,
     request: Request,

@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS alerts (
     correlation_id TEXT NOT NULL,
     flow_id TEXT NOT NULL REFERENCES flows(flow_id) ON DELETE CASCADE,
     risk_score INTEGER NOT NULL CHECK(risk_score BETWEEN 0 AND 100),
-    severity TEXT NOT NULL CHECK(severity IN ('Informational', 'Low', 'Medium', 'High', 'Critical')),
+    severity TEXT NOT NULL CHECK(severity IN ('Low', 'Medium', 'High', 'Critical')),
     confidence REAL NOT NULL CHECK(confidence BETWEEN 0.0 AND 1.0),
     threat_category TEXT NOT NULL,
     explanation TEXT NOT NULL,

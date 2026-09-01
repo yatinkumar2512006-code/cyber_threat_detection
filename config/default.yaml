@@ -5,8 +5,8 @@ system:
 
 pipeline:
   flow_window_seconds: 5.0
-  alert_threshold: 40
-  critical_threshold: 80
+  alert_threshold: 60
+  critical_threshold: 85
   dedup_window_seconds: 60.0
 
 model:

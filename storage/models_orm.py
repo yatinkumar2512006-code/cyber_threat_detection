@@ -83,7 +83,7 @@ class AlertORM(Base):
     )
     severity = Column(
         String,
-        CheckConstraint("severity IN ('Informational', 'Low', 'Medium', 'High', 'Critical')"),
+        CheckConstraint("severity IN ('Low', 'Medium', 'High', 'Critical')"),
         nullable=False,
         index=True
     )

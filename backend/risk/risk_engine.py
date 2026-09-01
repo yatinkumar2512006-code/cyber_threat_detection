@@ -57,6 +57,9 @@ class RiskEngine:
 
         rf_score_comp = 0.0 if threat_category.lower() == "benign" else (rf_prob * 100.0 if rf_prob > 0.3 else 70.0)
         if_score_comp = 0.0 if threat_category.lower() == "benign" else if_score * 100.0
+        if threat_category == "DDoS-like Volumetric Behavior" and (total_pkts >= 200 or mean_iat < 0.001):
+            rf_score_comp = max(rf_score_comp, 95.0)
+            if_score_comp = max(if_score_comp, 75.0)
 
         base_risk = (w_rf * rf_score_comp) + (w_if * if_score_comp)
 

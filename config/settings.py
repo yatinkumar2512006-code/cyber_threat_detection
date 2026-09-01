@@ -17,8 +17,8 @@ class Settings(BaseSettings):
     PROMISCUOUS_MODE: bool = True
 
     FLOW_WINDOW_SECONDS: float = 5.0
-    ALERT_THRESHOLD: int = 40
-    CRITICAL_THRESHOLD: int = 80
+    ALERT_THRESHOLD: int = 60
+    CRITICAL_THRESHOLD: int = 85
     DEDUP_WINDOW_SECONDS: float = 60.0
 
     WEIGHT_SUPERVISED_RF: float = 0.60
