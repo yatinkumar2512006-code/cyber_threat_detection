@@ -1,5 +1,14 @@
-const { useState, useEffect, useRef } = React;
+const API_BASE_URL = "https://cyber-threat-detection-0kdv.onrender.com";
 
+const originalFetch = window.fetch.bind(window);
+window.fetch = (input, init) => {
+  if (typeof input === "string" && input.startsWith("/api/")) {
+    input = API_BASE_URL + input;
+  }
+  return originalFetch(input, init);
+};
+
+const { useState, useEffect, useRef } = React;
 // --- Helper Functions ---
 function getSeverityBadgeClass(severity) {
   switch ((severity || "").toLowerCase()) {
