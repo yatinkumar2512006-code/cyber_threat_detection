@@ -33,7 +33,7 @@ app = FastAPI(
 # CORS Middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8000"],
+allow_origins=["https://cyber-threat-detection-i59fiw6cq-tech-geeks1.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
