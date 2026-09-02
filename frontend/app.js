@@ -583,7 +583,7 @@ function App() {
 
   // WebSocket Listener
   useEffect(() => {
-    const wsUrl = `ws://${window.location.host}/ws/live-traffic`;
+    const wsUrl = "wss://cyber-threat-detection-0kdv.onrender.com/ws/live-traffic";
     let ws;
     try {
       ws = new WebSocket(wsUrl);
